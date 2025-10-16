@@ -8,17 +8,18 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- Chosen Palette: Earthy Minimalist -->
-    <!-- Application Structure Plan: The application is designed as a single-page dashboard with tabbed navigation for major cities (Tokyo, Osaka, Kyoto) and a "Pro Tips" section. This structure was chosen over a linear itinerary to provide a flexible, user-driven planning experience. Users can explore culinary options by city and filter them by food category (Ramen, Sushi, etc.). This task-oriented design allows travelers to plan their days based on interest or location, rather than a rigid schedule. The core interaction is filtering cards, which instantly updates the view, making it easy to compare options. A summary chart highlights the most time-demanding restaurants, directly addressing the user's key concern about queuing and reinforcing the need for strategic planning. -->
+    <!-- Application Structure Plan: The application is designed as a single-page dashboard with tabbed navigation for major cities (Tokyo, Osaka, Kyoto) and a "Pro Tips" section. This structure was chosen over a linear itinerary to provide a flexible, user-driven planning experience. Users can explore culinary options by city and filter them by food category (Ramen, Sushi, etc.). This task-oriented design allows travelers to plan their days based on interest or location, rather than a rigid schedule. The core interaction is filtering cards, which instantly updates the view, making it easy to compare options. A summary chart highlights the most time-demanding restaurants, directly addressing the user's key concern about queuing and reinforcing the need for strategic planning. The Pro Tips section has been expanded to include essential travel logistics (transportation and weather). -->
     <!-- Visualization & Content Choices: 
-        - Report Info: List of cities, restaurants, food types, and crucial timing advice.
-        - Goal: To inform and allow comparison of culinary options and their required time investment.
+        - Report Info: List of cities, diverse restaurants (covering high/mid/budget range), food types, crucial timing advice, June weather, and city transport tips.
+        - Goal: To inform and allow comparison of culinary options and their required time investment, alongside necessary travel logistics.
         - Viz/Presentation Method:
             - Cities/Topics: Tab-based navigation (HTML/JS) for clear segmentation.
-            - Restaurants: Card grid (Tailwind CSS) for a visually appealing and scannable layout.
+            - Restaurants: Card grid (Tailwind CSS) for a visually appealing and scannable layout, implicitly showing range via different entries.
             - Food Types: Filter buttons (HTML/JS) for interactive content sorting.
             - Wait Times: A horizontal bar chart (Chart.js/Canvas) to visually compare the most demanding queues.
-        - Interaction: Users click tabs to switch cities and buttons to filter food types within that city. The card grid and chart update dynamically. This is more engaging and useful than a static list.
-        - Justification: This interactive model turns a flat research plan into a dynamic planning tool. The bar chart provides an immediate "at-a-glance" understanding of which dining experiences require the most significant planning effort, a key insight from the source material. -->
+            - Travel Tips: Dedicated text cards (HTML/CSS) for easy reading and synthesis.
+        - Interaction: Users click tabs to switch cities and buttons to filter food types. The card grid and chart update dynamically. This interactive model turns a flat research plan into a dynamic planning tool.
+        - Justification: This structure provides all information needed for trip execution: where to eat, when to show up, how to get there, and what to wear. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
@@ -70,7 +71,7 @@
         
         <header class="text-center mb-12">
             <h1 class="text-4xl md:text-5xl font-bold text-purple-800 mb-2">Japan Culinary Adventure</h1>
-            <p class="text-lg text-gray-600">Your interactive guide to the best food experiences in Japan.</p>
+            <p class="text-lg text-gray-600">Your interactive guide to the best food experiences and travel logistics.</p>
         </header>
 
         <nav class="flex justify-center border-b border-gray-200 mb-8">
@@ -85,7 +86,7 @@
             <section id="tokyo-section" class="content-section">
                 <div class="text-center mb-8">
                     <h2 class="text-3xl font-bold text-gray-800">Tokyo's Culinary Scene</h2>
-                    <p class="mt-2 text-gray-600 max-w-2xl mx-auto">From Michelin-starred sushi masters to bustling ramen alleys, Tokyo is a paradise for food lovers. Planning is key to experiencing the best, as the most famous spots command long lines and require reservations months in advance. Use the filters below to explore by category.</p>
+                    <p class="mt-2 text-gray-600 max-w-2xl mx-auto">From Michelin-starred sushi masters to casual tonkatsu joints, Tokyo offers a spectrum of flavors. Use the filters below to explore dining options across all price and style ranges.</p>
                 </div>
                 <div id="tokyo-filters" class="flex justify-center flex-wrap gap-2 mb-8"></div>
                 <div id="tokyo-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
@@ -94,7 +95,7 @@
             <section id="osaka-section" class="content-section hidden">
                 <div class="text-center mb-8">
                     <h2 class="text-3xl font-bold text-gray-800">Osaka: The Nation's Kitchen</h2>
-                    <p class="mt-2 text-gray-600 max-w-2xl mx-auto">Known for its credo of 'kuidaore' (eat till you drop), Osaka is famous for its hearty, flavorful street food and lively atmosphere. Dotonbori is the vibrant heart of its food scene, offering endless opportunities for delicious discoveries.</p>
+                    <p class="mt-2 text-gray-600 max-w-2xl mx-auto">Known for its street food and lively atmosphere, Osaka is the place for savory, deep-fried delights. Find your next great meal, from local sushi haunts to famous okonomiyaki houses.</p>
                 </div>
                 <div id="osaka-filters" class="flex justify-center flex-wrap gap-2 mb-8"></div>
                 <div id="osaka-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
@@ -103,7 +104,7 @@
             <section id="kyoto-section" class="content-section hidden">
                 <div class="text-center mb-8">
                     <h2 class="text-3xl font-bold text-gray-800">Kyoto's Refined Tastes</h2>
-                    <p class="mt-2 text-gray-600 max-w-2xl mx-auto">Kyoto offers a more refined culinary experience, from elegant multi-course 'kaiseki' dinners to delicate tofu dishes and the freshest market finds at Nishiki Market. It's a city where food is treated as an art form.</p>
+                    <p class="mt-2 text-gray-600 max-w-2xl mx-auto">Kyoto offers elegance, from traditional 'kaiseki' to delicate matcha sweets. This is where food is treated as an art form, focusing on seasonal ingredients and meticulous presentation.</p>
                 </div>
                 <div id="kyoto-filters" class="flex justify-center flex-wrap gap-2 mb-8"></div>
                 <div id="kyoto-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
@@ -111,32 +112,47 @@
 
             <section id="tips-section" class="content-section hidden">
                 <div class="text-center mb-8">
-                    <h2 class="text-3xl font-bold text-gray-800">Essential Foodie Pro-Tips</h2>
-                    <p class="mt-2 text-gray-600 max-w-2xl mx-auto">Navigating Japan's food scene can be tricky. Here are some tips to help you succeed, followed by a chart visualizing the time commitment for the most popular spots.</p>
+                    <h2 class="text-3xl font-bold text-gray-800">Essential Foodie Pro-Tips & Logistics</h2>
+                    <p class="mt-2 text-gray-600 max-w-2xl mx-auto">Strategic planning is key to a perfect trip. Review the queue times, weather expectations for June 2026, and city transportation strategies below.</p>
                 </div>
+                
+                <h3 class="text-2xl font-bold text-purple-700 mb-4 max-w-4xl mx-auto">Travel Logistics & Weather</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-12">
                     <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                        <h3 class="font-bold text-xl mb-2 text-purple-700">Reservations are King</h3>
-                        <p class="text-gray-700">For high-end restaurants (especially in Tokyo/Kyoto), book 1-3 months ahead. Use services like Tableall, Pocket Concierge, or your hotel's concierge. Many top spots do not accept direct foreign reservations.</p>
+                        <h4 class="font-bold text-xl mb-2 text-purple-700">June 2026 Weather & Packing</h4>
+                        <p class="text-gray-700">June marks the start of the **Tsuyu (Rainy Season)** across most of Japan. Expect frequent, steady rain (not usually all-day downpours) and **high humidity**.</p>
+                        <ul class="list-disc pl-5 mt-3 text-sm text-gray-600">
+                            <li>**Temperatures:** Warm, $20^\circ \text{C}$ to $27^\circ \text{C}$ ($68^\circ \text{F}$ to $81^\circ \text{F}$).</li>
+                            <li>**Packing:** **Waterproof jacket**, sturdy walking shoes that can handle wet streets, lightweight/quick-dry clothing, and a compact umbrella.</li>
+                        </ul>
                     </div>
                     <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                        <h3 class="font-bold text-xl mb-2 text-purple-700">Embrace the Queue</h3>
-                        <p class="text-gray-700">For popular spots without reservations (like ramen shops), a line is a sign of quality. Arrive 30 minutes before opening to be in the first seating. Avoid peak lunch (12-1 PM) and dinner (6-8 PM) times for shorter waits.</p>
+                        <h4 class="font-bold text-xl mb-2 text-purple-700">City Transportation Guide</h4>
+                        <p class="text-gray-700">**IC Cards are essential.** Purchase a Suica, Pasmo, or Icoca card immediately upon arrival. They work on all major trains, subways, and buses in all three cities.</p>
+                        <ul class="list-disc pl-5 mt-3 text-sm text-gray-600">
+                            <li>**Tokyo:** Rely on the efficient **JR and Subway** systems. Google Maps is perfect for routing.</li>
+                            <li>**Osaka:** Use the **Subway** for local travel and the **JR Loop Line** for quick access to major areas.</li>
+                            <li>**Kyoto:** Heavily reliant on **Buses**. Purchase a 1-day bus pass if you plan on visiting multiple temples/attractions.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-bold text-purple-700 mb-4 max-w-4xl mx-auto">Queue Strategy & Reservations</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-12">
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                        <h4 class="font-bold text-xl mb-2 text-purple-700">Reservations are King</h4>
+                        <p class="text-gray-700">For high-end restaurants (especially in Tokyo/Kyoto, like Ginza Sushi), book 1-3 months ahead. Use services like Tableall, Pocket Concierge, or your hotel's concierge. Many top spots do not accept direct foreign reservations.</p>
                     </div>
                     <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                        <h3 class="font-bold text-xl mb-2 text-purple-700">Cash is Still Common</h3>
-                        <p class="text-gray-700">While major chains accept cards, many smaller ramen shops, market stalls, and traditional restaurants are cash-only. Always have a sufficient amount of yen with you, especially outside of major city centers.</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                        <h3 class="font-bold text-xl mb-2 text-purple-700">Ticket Vending Machines</h3>
-                        <p class="text-gray-700">Many ramen and donburi shops use a vending machine system. You insert cash, select your meal from the buttons (which often have pictures), and give the ticket to the chef. It's an efficient system once you get the hang of it!</p>
+                        <h4 class="font-bold text-xl mb-2 text-purple-700">Embrace the Queue</h4>
+                        <p class="text-gray-700">For popular spots without reservations (like ramen shops), a line is a sign of quality. **Arrive 30 minutes before opening** to be in the first seating. Avoid peak lunch (12-1 PM) and dinner (6-8 PM) times for shorter waits.</p>
                     </div>
                 </div>
 
                 <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 max-w-4xl mx-auto">
                      <div class="text-center mb-4">
                         <h3 class="text-2xl font-bold text-gray-800">The Waiting Game: Peak Queue Times</h3>
-                        <p class="mt-1 text-gray-600">This chart shows the estimated wait time if you arrive during peak hours at some of Japan's most in-demand restaurants. Use this to strategize your visit and decide which experiences are worth the wait.</p>
+                        <p class="mt-1 text-gray-600">This chart shows the estimated wait time (or booking lead time) required for Japan's most in-demand restaurants. Plan your commitment accordingly.</p>
                     </div>
                     <div class="chart-container">
                         <canvas id="waitTimeChart"></canvas>
@@ -150,28 +166,33 @@
 
     <script>
         const foodData = [
-            { city: 'tokyo', name: 'Sushi Dai', category: 'Sushi', icon: '🍣', description: 'Legendary sushi experience at Toyosu Market, known for its incredibly fresh ingredients and masterful preparation.', timing: 'CRITICAL: Wake up at 3:00 AM. Arrive at Toyosu Market by 4:00 AM to have a chance for the first seating around 6:00 AM. Expect a 2-4 hour wait. Not for the faint of heart.' },
-            { city: 'tokyo', name: 'Ichiran Ramen', category: 'Ramen', icon: '🍜', description: 'Famous for its customizable tonkotsu ramen and solo dining booths for a focused flavor experience.', timing: 'STRATEGY: Lines can be 30-60 minutes at peak hours. For minimal wait, go mid-afternoon (2-4 PM) or late at night (after 10 PM). Most branches are open 24/7.' },
-            { city: 'tokyo', name: 'Tempura Kondo', category: 'Tempura', icon: '🍤', description: 'A 2-Michelin star tempura restaurant in Ginza, offering light, perfectly fried seasonal ingredients.', timing: 'RESERVATION: Book 1-2 months in advance via a high-end hotel concierge or a reliable booking service. Extremely difficult to book otherwise.' },
-            { city: 'tokyo', name: 'Maisen Aoyama Honten', category: 'Tonkatsu', icon: '🐷', description: 'Arguably Tokyo\'s most famous Tonkatsu restaurant, known for its perfectly crisp breading and tender, high-quality pork.', timing: 'PLAN AHEAD: Arrive 15 minutes before lunch (11:00 AM) or dinner (5:00 PM) opening time. Expect a 30-60 minute wait during peak hours. Great mid-day option (2-4 PM).' },
-            { city: 'tokyo', name: 'Shin Udon', category: 'Udon', icon: '🍲', description: 'Known for its handmade, thick, chewy noodles, especially the cold options like the famous beef carbonara udon.', timing: 'QUEUE EARLY: This small shop often has a line forming 30 minutes before opening. Arrive by 10:30 AM for lunch to minimize your wait time, which can exceed 90 minutes at noon.' },
+            // TOKYO Entries (Expanded Range)
+            { city: 'tokyo', name: 'Sushi Dai', category: 'Sushi', icon: '🍣', description: 'Legendary budget high-end sushi experience at Toyosu Market. Known for its incredibly fresh ingredients and masterful preparation.', timing: 'CRITICAL: Wake up at 3:00 AM. Arrive at Toyosu Market by 4:00 AM to have a chance for the first seating around 6:00 AM. Expect a 2-4 hour wait.' },
+            { city: 'tokyo', name: 'Katsukura (Shinjuku)', category: 'Tonkatsu', icon: '🐷', description: 'A beloved mid-range tonkatsu chain (originating in Kyoto) known for its crisp, light crust and selection of dipping sauces.', timing: 'STRATEGY: Mid-range wait time. Arrive 15 minutes before 11:00 AM lunch or 5:00 PM dinner. Peak hours are 30-45 minute waits. Excellent quality for the price.' },
+            { city: 'tokyo', name: 'Ichiran Ramen', category: 'Ramen', icon: '🍜', description: 'Famous for its customizable tonkotsu ramen and solo dining booths for a focused flavor experience (budget/mid-range).', timing: 'STRATEGY: Lines can be 30-60 minutes at peak hours. For minimal wait, go mid-afternoon (2-4 PM) or late at night (after 10 PM). Most branches are open 24/7.' },
+            { city: 'tokyo', name: 'Tempura Kondo', category: 'Tempura', icon: '🍤', description: 'A 2-Michelin star tempura restaurant in Ginza, offering light, perfectly fried seasonal ingredients (High-end).', timing: 'RESERVATION: Book 1-2 months in advance via a high-end hotel concierge or a reliable booking service. Extremely difficult to book otherwise.' },
+            { city: 'tokyo', name: 'Harbs (Various Locations)', category: 'Sweets', icon: '🍰', description: 'Famous for its oversized, fresh fruit crepe cakes and sliced cakes. A perfect mid-afternoon dessert spot.', timing: 'EASY: You may wait 15-25 minutes for a table at peak dessert time (3-5 PM), especially on weekends. Takeout is usually quicker, if available.' },
             { city: 'tokyo', name: 'Rokurinsha', category: 'Tsukemen', icon: 'つけ麺', description: 'One of Tokyo\'s most famous tsukemen (dipping noodles) shops, located on Ramen Street in Tokyo Station.', timing: 'PLAN AHEAD: The line is almost always 45-90 minutes long. Try to go during off-peak hours, like 10:30 AM or after 3 PM, for a slightly shorter wait.' },
 
-            { city: 'osaka', name: 'Dotonbori Street Food', category: 'Street Food', icon: '🐙', description: 'The heart of Osaka\'s food scene. A must-visit for takoyaki, okonomiyaki, and gyoza from various stalls.', timing: 'PEAK HOURS: Best experienced in the evening when all the neon lights are on. It gets very crowded from 6 PM onwards. Just dive in and enjoy the energy.' },
-            { city: 'osaka', name: 'Mizuno', category: 'Okonomiyaki', icon: '🍳', description: 'A Michelin Bib Gourmand okonomiyaki restaurant in Dotonbori with a perpetual line out the front.', timing: 'QUEUE EARLY: Arrive 30 minutes before they open for lunch or dinner to minimize your wait time. Otherwise, expect to queue for 45-75 minutes.' },
-            { city: 'osaka', name: 'Kushikatsu Daruma', category: 'Kushikatsu', icon: '🍢', description: 'A famous chain for kushikatsu (deep-fried skewers). Remember the golden rule: no double-dipping in the sauce!', timing: 'ACCESSIBLE: There are many branches, so waits are usually manageable (15-30 minutes). The main Dotonbori branch is the busiest.' },
-            { city: 'osaka', name: 'Kuromon Ichiba Market', category: 'Market', icon: '🦀', description: 'A large public market with incredible fresh seafood (grilled scallops, uni, fatty tuna) and other local produce.', timing: 'MORNING/LUNCH: Best visited in the late morning (around 10 AM) before the lunch rush. It gets extremely packed from 12 PM to 2 PM.' },
-            { city: 'osaka', name: 'Ajinokura (Yakitori)', category: 'Izakaya', icon: '🍻', description: 'A classic, high-quality yakitori spot perfect for an authentic Izakaya experience with delicious grilled chicken skewers and beer.', timing: 'WALK-IN: Less intense queuing. Arrive around 5:30 PM for dinner, especially on weekdays, to secure a table without a long wait. Weekend evenings may require a short queue.' },
+            // OSAKA Entries (Expanded Range)
+            { city: 'osaka', name: 'Dotonbori Street Food', category: 'Street Food', icon: '🐙', description: 'The heart of Osaka\'s food scene. A must-visit for takoyaki, okonomiyaki, and gyoza from various stalls (Budget/Casual).', timing: 'PEAK HOURS: Best experienced in the evening when all the neon lights are on. It gets very crowded from 6 PM onwards. The joy is in the spontaneous exploration.' },
+            { city: 'osaka', name: 'Mizuno', category: 'Okonomiyaki', icon: '🍳', description: 'A Michelin Bib Gourmand okonomiyaki restaurant in Dotonbori with a perpetual line out the front (Mid-range).', timing: 'QUEUE EARLY: Arrive 30 minutes before they open for lunch or dinner to minimize your wait time. Otherwise, expect to queue for 45-75 minutes.' },
+            { city: 'osaka', name: 'Harukoma Sushi (Tenma)', category: 'Sushi', icon: '🍣', description: 'Highly popular, budget-friendly local sushi spot known for generous portions and a bustling atmosphere.', timing: 'MANAGEABLE: Waits are typically 30-60 minutes around lunchtime (12-1 PM). Avoid 12:30 PM. Go around 2 PM for the best chance at a quick seat.' },
+            { city: 'osaka', name: 'Pablo (Dotonbori)', category: 'Sweets', icon: '🧀', description: 'Famous for its rich, creamy cheese tarts which come in various flavors and sizes. A great takeaway dessert (Budget).', timing: 'EASY: Usually a walk-up/walk-in experience. Lines are typically short (5-15 minutes) for takeaway tarts.' },
+            { city: 'osaka', name: 'Kuromon Ichiba Market', category: 'Market', icon: '🦀', description: 'A large public market with incredible fresh seafood and local produce (Budget/Casual).', timing: 'MORNING/LUNCH: Best visited in the late morning (around 10 AM) before the lunch rush. It gets extremely packed from 12 PM to 2 PM.' },
+            { city: 'osaka', name: 'Ajinokura (Yakitori)', category: 'Izakaya', icon: '🍻', description: 'A classic, high-quality yakitori spot perfect for an authentic Izakaya experience (Mid-range).', timing: 'WALK-IN: Arrive around 5:30 PM for dinner, especially on weekdays, to secure a table without a long wait. Weekend evenings may require a short queue.' },
 
-            { city: 'kyoto', name: 'Kikunoi Roan', category: 'Kaiseki', icon: '🌸', description: 'A 2-Michelin star restaurant offering a more accessible but still exquisite kaiseki (traditional multi-course) experience.', timing: 'RESERVATION: Essential. Book 2-3 months in advance via their website or a booking service. Lunch is slightly easier to book than dinner.' },
-            { city: 'kyoto', name: 'Nishiki Market', category: 'Market', icon: '🍡', description: 'Known as "Kyoto\'s Kitchen," this narrow shopping street is lined with stalls selling everything from pickles to fresh sashimi skewers.', timing: 'MID-MORNING: Go around 10-11 AM. It becomes a shoulder-to-shoulder crush of people during lunchtime and on weekends.' },
-            { city: 'kyoto', name: 'Moritaya (Sukiyaki)', category: 'Wagyu/Sukiyaki', icon: '🥩', description: 'Specializes in high-grade Kyoto beef served in the traditional Sukiyaki style, a must-try for meat lovers.', timing: 'RESERVATION: Strongly recommended for dinner. Book at least 2-3 weeks in advance. Lunch can often be walked into, but book ahead if you have a large party.' },
-            { city: 'kyoto', name: 'Tsujiri Gion Honten', category: 'Sweets/Matcha', icon: '🍵', description: 'Kyoto\'s famous green tea specialty shop offering incredible matcha parfaits, soft-serve ice cream, and traditional sweets.', timing: 'AVOID PEAK: Waits are usually 15-45 minutes. Visit right at 10:00 AM opening or late in the evening (after 7 PM) to minimize your wait for a table.' },
-            { city: 'kyoto', name: 'Menbaka Fire Ramen', category: 'Ramen', icon: '🔥', description: 'A unique experience where chefs pour flaming oil over your green onion ramen, creating a dramatic and flavorful show.', timing: 'QUEUE EARLY: This spot is incredibly popular with tourists. Arrive at least 45 minutes before they open to secure a spot in the first seating. They often cut the line off early.' }
+            // KYOTO Entries (Expanded Range)
+            { city: 'kyoto', name: 'Kikunoi Roan', category: 'Kaiseki', icon: '🌸', description: 'A 2-Michelin star restaurant offering an exquisite kaiseki (traditional multi-course) experience (High-end).', timing: 'RESERVATION: Essential. Book 2-3 months in advance via a booking service. Lunch is slightly easier to book than dinner.' },
+            { city: 'kyoto', name: 'Moritaya (Sukiyaki)', category: 'Wagyu/Sukiyaki', icon: '🥩', description: 'Specializes in high-grade Kyoto beef served in the traditional Sukiyaki style (Mid-range/High-end).', timing: 'RESERVATION: Strongly recommended for dinner. Book at least 2-3 weeks in advance. Lunch can often be walked into, but book ahead if you have a large party.' },
+            { city: 'kyoto', name: 'Ippudo (Nishikikoji)', category: 'Ramen', icon: '🍜', description: 'One of the best-known and most reliable Hakata-style tonkotsu ramen chains (Budget/Mid-range).', timing: 'EASY: A reliable choice with generally short waits (10-25 minutes). Use this as a backup or a quick evening meal when you don\'t want to queue.' },
+            { city: 'kyoto', name: 'Tsujiri Gion Honten', category: 'Sweets/Matcha', icon: '🍵', description: 'Kyoto\'s famous green tea specialty shop offering incredible matcha parfaits and traditional sweets (Mid-range).', timing: 'AVOID PEAK: Waits are usually 15-45 minutes for a table. Visit right at 10:00 AM opening or late in the evening (after 7 PM) to minimize your wait.' },
+            { city: 'kyoto', name: 'Menbaka Fire Ramen', category: 'Ramen', icon: '🔥', description: 'A unique experience where chefs pour flaming oil over your ramen, creating a dramatic and flavorful show (Casual/Experience).', timing: 'QUEUE EARLY: Arrive at least 45 minutes before they open to secure a spot in the first seating. They often cut the line off early due to popularity.' },
+            { city: 'kyoto', name: 'Nishiki Market', category: 'Market', icon: '🍡', description: 'Known as "Kyoto\'s Kitchen," offering stalls selling everything from pickles to fresh sashimi skewers (Budget/Casual).', timing: 'MID-MORNING: Go around 10-11 AM. It becomes a shoulder-to-shoulder crush of people during lunchtime and on weekends.' }
         ];
 
         const waitTimeData = [
-            { name: "Sushi Dai (Tokyo)", time: 3 },
+            { name: "Sushi Dai (Tokyo)", time: 3.5 },
             { name: "Kikunoi Roan (Booking)", time: 2.5 },
             { name: "Tempura Kondo (Booking)", time: 2.5 },
             { name: "Shin Udon (Tokyo)", time: 1.5 },
@@ -217,7 +238,7 @@
             const renderFilters = (city) => {
                 const container = document.getElementById(`${city}-filters`);
                 if (!container) return;
-                const categories = ['All', ...new Set(foodData.filter(item => item.city === city).map(item => item.category))];
+                const categories = ['All', ...new Set(foodData.filter(item => item.city === city).map(item => item.category))].sort();
                 container.innerHTML = '';
                 categories.forEach(category => {
                     const button = document.createElement('button');

@@ -31,14 +31,14 @@
             border-bottom: 2px solid transparent;
         }
         .nav-link.active {
-            border-bottom-color: #c084fc; /* purple-400 */
-            color: #9333ea; /* purple-600 */
+            border-bottom-color: #c084fc;
+            color: #9333ea;
         }
         .filter-btn {
             transition: all 0.3s ease;
         }
         .filter-btn.active {
-            background-color: #a855f7; /* purple-500 */
+            background-color: #a855f7;
             color: white;
         }
         .card {
@@ -153,27 +153,32 @@
             { city: 'tokyo', name: 'Sushi Dai', category: 'Sushi', icon: '🍣', description: 'Legendary sushi experience at Toyosu Market, known for its incredibly fresh ingredients and masterful preparation.', timing: 'CRITICAL: Wake up at 3:00 AM. Arrive at Toyosu Market by 4:00 AM to have a chance for the first seating around 6:00 AM. Expect a 2-4 hour wait. Not for the faint of heart.' },
             { city: 'tokyo', name: 'Ichiran Ramen', category: 'Ramen', icon: '🍜', description: 'Famous for its customizable tonkotsu ramen and solo dining booths for a focused flavor experience.', timing: 'STRATEGY: Lines can be 30-60 minutes at peak hours. For minimal wait, go mid-afternoon (2-4 PM) or late at night (after 10 PM). Most branches are open 24/7.' },
             { city: 'tokyo', name: 'Tempura Kondo', category: 'Tempura', icon: '🍤', description: 'A 2-Michelin star tempura restaurant in Ginza, offering light, perfectly fried seasonal ingredients.', timing: 'RESERVATION: Book 1-2 months in advance via a high-end hotel concierge or a reliable booking service. Extremely difficult to book otherwise.' },
+            { city: 'tokyo', name: 'Maisen Aoyama Honten', category: 'Tonkatsu', icon: '🐷', description: 'Arguably Tokyo\'s most famous Tonkatsu restaurant, known for its perfectly crisp breading and tender, high-quality pork.', timing: 'PLAN AHEAD: Arrive 15 minutes before lunch (11:00 AM) or dinner (5:00 PM) opening time. Expect a 30-60 minute wait during peak hours. Great mid-day option (2-4 PM).' },
+            { city: 'tokyo', name: 'Shin Udon', category: 'Udon', icon: '🍲', description: 'Known for its handmade, thick, chewy noodles, especially the cold options like the famous beef carbonara udon.', timing: 'QUEUE EARLY: This small shop often has a line forming 30 minutes before opening. Arrive by 10:30 AM for lunch to minimize your wait time, which can exceed 90 minutes at noon.' },
             { city: 'tokyo', name: 'Rokurinsha', category: 'Tsukemen', icon: 'つけ麺', description: 'One of Tokyo\'s most famous tsukemen (dipping noodles) shops, located on Ramen Street in Tokyo Station.', timing: 'PLAN AHEAD: The line is almost always 45-90 minutes long. Try to go during off-peak hours, like 10:30 AM or after 3 PM, for a slightly shorter wait.' },
-            { city: 'tokyo', name: 'Tsuta', category: 'Ramen', icon: '🍜', description: 'The world\'s first Michelin-starred ramen shop, famous for its truffle-infused shoyu soba.', timing: 'TICKET SYSTEM: Formerly required lining up early for a timed ticket. Now requires online reservation. Check their official site for the current system as it changes.' },
 
             { city: 'osaka', name: 'Dotonbori Street Food', category: 'Street Food', icon: '🐙', description: 'The heart of Osaka\'s food scene. A must-visit for takoyaki, okonomiyaki, and gyoza from various stalls.', timing: 'PEAK HOURS: Best experienced in the evening when all the neon lights are on. It gets very crowded from 6 PM onwards. Just dive in and enjoy the energy.' },
             { city: 'osaka', name: 'Mizuno', category: 'Okonomiyaki', icon: '🍳', description: 'A Michelin Bib Gourmand okonomiyaki restaurant in Dotonbori with a perpetual line out the front.', timing: 'QUEUE EARLY: Arrive 30 minutes before they open for lunch or dinner to minimize your wait time. Otherwise, expect to queue for 45-75 minutes.' },
             { city: 'osaka', name: 'Kushikatsu Daruma', category: 'Kushikatsu', icon: '🍢', description: 'A famous chain for kushikatsu (deep-fried skewers). Remember the golden rule: no double-dipping in the sauce!', timing: 'ACCESSIBLE: There are many branches, so waits are usually manageable (15-30 minutes). The main Dotonbori branch is the busiest.' },
             { city: 'osaka', name: 'Kuromon Ichiba Market', category: 'Market', icon: '🦀', description: 'A large public market with incredible fresh seafood (grilled scallops, uni, fatty tuna) and other local produce.', timing: 'MORNING/LUNCH: Best visited in the late morning (around 10 AM) before the lunch rush. It gets extremely packed from 12 PM to 2 PM.' },
-            
+            { city: 'osaka', name: 'Ajinokura (Yakitori)', category: 'Izakaya', icon: '🍻', description: 'A classic, high-quality yakitori spot perfect for an authentic Izakaya experience with delicious grilled chicken skewers and beer.', timing: 'WALK-IN: Less intense queuing. Arrive around 5:30 PM for dinner, especially on weekdays, to secure a table without a long wait. Weekend evenings may require a short queue.' },
+
             { city: 'kyoto', name: 'Kikunoi Roan', category: 'Kaiseki', icon: '🌸', description: 'A 2-Michelin star restaurant offering a more accessible but still exquisite kaiseki (traditional multi-course) experience.', timing: 'RESERVATION: Essential. Book 2-3 months in advance via their website or a booking service. Lunch is slightly easier to book than dinner.' },
             { city: 'kyoto', name: 'Nishiki Market', category: 'Market', icon: '🍡', description: 'Known as "Kyoto\'s Kitchen," this narrow shopping street is lined with stalls selling everything from pickles to fresh sashimi skewers.', timing: 'MID-MORNING: Go around 10-11 AM. It becomes a shoulder-to-shoulder crush of people during lunchtime and on weekends.' },
-            { city: 'kyoto', name: 'Menbaka Fire Ramen', category: 'Ramen', icon: '🔥', description: 'A unique experience where chefs pour flaming oil over your green onion ramen, creating a dramatic and flavorful show.', timing: 'QUEUE EARLY: This spot is incredibly popular with tourists. Arrive at least 45 minutes before they open to secure a spot in the first seating. They often cut the line off early.' },
-            { city: 'kyoto', name: 'Gogyo', category: 'Ramen', icon: '🍜', description: 'Famous for its kogashi (burnt) miso and shoyu ramen, which has a deep, smoky, and complex flavor.', timing: 'MANAGEABLE: Waits are common but usually not extreme. Expect a 20-40 minute wait during peak times. A solid option if you want great ramen without a 2-hour queue.' }
+            { city: 'kyoto', name: 'Moritaya (Sukiyaki)', category: 'Wagyu/Sukiyaki', icon: '🥩', description: 'Specializes in high-grade Kyoto beef served in the traditional Sukiyaki style, a must-try for meat lovers.', timing: 'RESERVATION: Strongly recommended for dinner. Book at least 2-3 weeks in advance. Lunch can often be walked into, but book ahead if you have a large party.' },
+            { city: 'kyoto', name: 'Tsujiri Gion Honten', category: 'Sweets/Matcha', icon: '🍵', description: 'Kyoto\'s famous green tea specialty shop offering incredible matcha parfaits, soft-serve ice cream, and traditional sweets.', timing: 'AVOID PEAK: Waits are usually 15-45 minutes. Visit right at 10:00 AM opening or late in the evening (after 7 PM) to minimize your wait for a table.' },
+            { city: 'kyoto', name: 'Menbaka Fire Ramen', category: 'Ramen', icon: '🔥', description: 'A unique experience where chefs pour flaming oil over your green onion ramen, creating a dramatic and flavorful show.', timing: 'QUEUE EARLY: This spot is incredibly popular with tourists. Arrive at least 45 minutes before they open to secure a spot in the first seating. They often cut the line off early.' }
         ];
 
         const waitTimeData = [
-            { name: "Sushi Dai", time: 3 },
-            { name: "Tempura Kondo (Booking)", time: 2.5 },
+            { name: "Sushi Dai (Tokyo)", time: 3 },
             { name: "Kikunoi Roan (Booking)", time: 2.5 },
-            { name: "Menbaka Fire Ramen", time: 1.5 },
-            { name: "Rokurinsha", time: 1.25 },
-            { name: "Mizuno", time: 1 },
+            { name: "Tempura Kondo (Booking)", time: 2.5 },
+            { name: "Shin Udon (Tokyo)", time: 1.5 },
+            { name: "Menbaka Fire Ramen (Kyoto)", time: 1.5 },
+            { name: "Rokurinsha (Tokyo)", time: 1.25 },
+            { name: "Maisen Tonkatsu (Tokyo)", time: 1 },
+            { name: "Mizuno Okonomiyaki (Osaka)", time: 1 },
         ];
 
         document.addEventListener('DOMContentLoaded', () => {

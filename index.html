@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Japan Culinary Adventure Planner</title>
+    <title>Japan Culinary & Activity Planner</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -30,6 +30,7 @@
         }
         .card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
         }
         .card:hover {
             transform: translateY(-5px);
@@ -39,6 +40,7 @@
         .price-mid { background-color: #fcd34d; color: #92400e; } /* Yellow for Mid-Range */
         .price-budget { background-color: #a7f3d0; color: #065f46; } /* Green for Budget */
         .area-tag { background-color: #e9d5ff; color: #7e22ce; } /* Purple for Area */
+        .activity-card { border-left: 4px solid #3b82f6; }
         .chart-container {
             position: relative;
             width: 100%;
@@ -60,8 +62,8 @@
     <div class="container mx-auto px-4 py-8">
         
         <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-bold text-purple-800 mb-2">Japan Culinary Adventure</h1>
-            <p class="text-lg text-gray-600">Explore meals by **Price Range** and **City Area** for smarter planning.</p>
+            <h1 class="text-4xl md:text-5xl font-bold text-purple-800 mb-2">Japan Culinary & Activity Planner</h1>
+            <p class="text-lg text-gray-600">Explore food by **Price/Commitment** and group activities by **Area** for a perfect itinerary.</p>
         </header>
 
         <nav class="flex justify-center border-b border-gray-200 mb-8 overflow-x-auto whitespace-nowrap">
@@ -73,33 +75,52 @@
 
         <main id="content-container">
             
+            <!-- TOKYO SECTION -->
             <section id="tokyo-section" class="content-section">
                 <div class="text-center mb-8">
-                    <h2 class="text-3xl font-bold text-gray-800">Tokyo's Culinary Scene</h2>
-                    <p class="mt-2 text-gray-600 max-w-2xl mx-auto">Tokyo is vast. Use the **Area** tags on the cards to group meals by district, like Shinjuku or Ginza, for efficient travel.  </p>
+                    <h2 class="text-3xl font-bold text-gray-800">Tokyo: The Megacity Map</h2>
+                    <p class="mt-2 text-gray-600 max-w-2xl mx-auto">Group your meals and activities by area (Ginza, Shinjuku, Toyosu) to save time on the massive subway system. </p>
                 </div>
+                
+                <h3 class="text-2xl font-bold text-blue-700 mb-4 border-b border-blue-200 pb-2">Top Activities</h3>
+                <div id="tokyo-activities" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-10"></div>
+
+                <h3 class="text-2xl font-bold text-purple-700 mb-4 border-b border-purple-200 pb-2">Food Recommendations</h3>
                 <div id="tokyo-filters" class="flex justify-center flex-wrap gap-2 mb-8"></div>
                 <div id="tokyo-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
             </section>
 
+            <!-- OSAKA SECTION -->
             <section id="osaka-section" class="content-section hidden">
                 <div class="text-center mb-8">
-                    <h2 class="text-3xl font-bold text-gray-800">Osaka: The Nation's Kitchen</h2>
-                    <p class="mt-2 text-gray-600 max-w-2xl mx-auto">Most of Osaka's top spots are clustered around the Namba/Dotonbori area, making walking the primary mode of transport here. </p>
+                    <h2 class="text-3xl font-bold text-gray-800">Osaka: The Nation's Kitchen Map</h2>
+                    <p class="mt-2 text-gray-600 max-w-2xl mx-auto">Most food spots are near Namba/Dotonbori (Minami area), while USJ is in the west. Plan for travel time to the park. </p>
                 </div>
+
+                <h3 class="text-2xl font-bold text-blue-700 mb-4 border-b border-blue-200 pb-2">Top Activities</h3>
+                <div id="osaka-activities" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-10"></div>
+
+                <h3 class="text-2xl font-bold text-purple-700 mb-4 border-b border-purple-200 pb-2">Food Recommendations</h3>
                 <div id="osaka-filters" class="flex justify-center flex-wrap gap-2 mb-8"></div>
                 <div id="osaka-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
             </section>
 
+            <!-- KYOTO SECTION -->
             <section id="kyoto-section" class="content-section hidden">
                 <div class="text-center mb-8">
-                    <h2 class="text-3xl font-bold text-gray-800">Kyoto's Refined Tastes</h2>
-                    <p class="mt-2 text-gray-600 max-w-2xl mx-auto">Kyoto is best navigated by bus, so group your meals by area like Gion or Nishiki Market to save time. </p>
+                    <h2 class="text-3xl font-bold text-gray-800">Kyoto: The Cultural Core Map</h2>
+                    <p class="mt-2 text-gray-600 max-w-2xl mx-auto">Activities and refined dining are spread out (Arashiyama, Gion, Fushimi). Focus on the bus network for travel between districts. </p>
                 </div>
+                
+                <h3 class="text-2xl font-bold text-blue-700 mb-4 border-b border-blue-200 pb-2">Top Activities</h3>
+                <div id="kyoto-activities" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-10"></div>
+
+                <h3 class="text-2xl font-bold text-purple-700 mb-4 border-b border-purple-200 pb-2">Food Recommendations</h3>
                 <div id="kyoto-filters" class="flex justify-center flex-wrap gap-2 mb-8"></div>
                 <div id="kyoto-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
             </section>
 
+            <!-- TIPS SECTION -->
             <section id="tips-section" class="content-section hidden">
                 <div class="text-center mb-8">
                     <h2 class="text-3xl font-bold text-gray-800">Essential Foodie Pro-Tips & Logistics</h2>
@@ -214,142 +235,187 @@
             { city: 'kyoto', name: 'Saryo Tsujiri', category: 'Sweets/Matcha', icon: '🍵', priceRange: 'High-End', area: 'Gion', description: 'Known for its highly refined, high-grade matcha drinks and seasonal desserts. A high-quality sweet experience.', timing: 'QUEUE: Plan for 20-40 minutes wait, especially in the afternoon.' }
         ];
 
+        const activityData = {
+            tokyo: [
+                { name: 'Shibuya Crossing', description: 'World\'s busiest intersection and Hachiko Statue.', area: 'Shibuya', icon: '🚶' },
+                { name: 'Tokyo Skytree / Tokyo Tower', description: '360-degree city views from the observation deck.', area: 'Sumida / Minato', icon: '🗼' },
+                { name: 'Imperial Palace East Garden', description: 'Walk the grounds of the former Edo Castle.', area: 'Chiyoda', icon: '🏯' },
+                { name: 'TeamLab Planets', description: 'Immersive, sensory digital art museum (Must book ahead).', area: 'Toyosu', icon: '🖼️' },
+            ],
+            osaka: [
+                { name: 'Universal Studios Japan (USJ)', description: 'Major theme park, home to Super Nintendo World (Full Day commitment).', area: 'Konohana Ward', icon: '🎢' },
+                { name: 'Osaka Castle', description: 'Stunning reconstruction of the famous castle.', area: 'Chuo Ward', icon: '🛡️' },
+                { name: 'Shinsekai & Tsutenkaku Tower', description: 'Explore the nostalgic, retro district and tower.', area: 'Shinsekai', icon: '⛩️' },
+                { name: 'Umeda Sky Building', description: 'Floating Garden Observatory for fantastic city views.', area: 'Kita Ward', icon: '🏙️' },
+            ],
+            kyoto: [
+                { name: 'Fushimi Inari Shrine', description: 'Hike through thousands of red torii gates (best at sunrise).', area: 'Fushimi Ward', icon: '🦊' },
+                { name: 'Arashiyama Bamboo Grove', description: 'Visit the famous bamboo forest and surrounding Sagano area.', area: 'Arashiyama', icon: '🎋' },
+                { name: 'Kiyomizu-dera Temple', description: 'Iconic wooden temple with panoramic city views.', area: 'Higashiyama', icon: '🙏' },
+                { name: 'Gion District Walk', description: 'Explore the historical geisha district and traditional houses.', area: 'Gion', icon: '👘' },
+            ]
+        };
+
         const waitTimeData = [
-            { name: "Sukiyabashi Jiro (Booking)", time: 4 }, // ~17 weeks lead time
+            { name: "Sukiyabashi Jiro (Booking)", time: 4 }, 
             { name: "Sushi Dai (Tokyo)", time: 3.5 },
             { name: "Kikunoi Roan (Booking)", time: 2.5 },
             { name: "Menbaka Fire Ramen (Kyoto)", time: 1.5 },
             { name: "Ginza Kagari Ramen (Tokyo)", time: 1.5 },
-            { name: "Maisen Tonkatsu (Tokyo)", time: 1 },
             { name: "Mizuno Okonomiyaki (Osaka)", time: 1 },
         ];
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const navLinks = document.querySelectorAll('.nav-link');
-            const sections = document.querySelectorAll('.content-section');
+        const renderActivities = (city) => {
+            const container = document.getElementById(`${city}-activities`);
+            if (!container) return;
+            container.innerHTML = '';
+            
+            activityData[city].forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'activity-card bg-blue-50 p-4 rounded-lg shadow-sm border border-blue-200';
+                card.innerHTML = `
+                    <div class="flex items-center mb-2">
+                        <span class="text-2xl mr-2">${item.icon}</span>
+                        <h4 class="font-bold text-lg text-blue-800">${item.name}</h4>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-2">${item.description}</p>
+                    <span class="px-3 py-1 text-xs font-bold rounded-full area-tag">
+                        ${item.area}
+                    </span>
+                `;
+                container.appendChild(card);
+            });
+        };
 
-            const renderCards = (city, category = 'All') => {
-                const container = document.getElementById(`${city}-cards`);
-                if (!container) return;
-                container.innerHTML = '';
-                const filteredData = foodData.filter(item => item.city === city && (category === 'All' || item.category === category));
+        const renderCards = (city, category = 'All') => {
+            const container = document.getElementById(`${city}-cards`);
+            if (!container) return;
+            container.innerHTML = '';
+            const filteredData = foodData.filter(item => item.city === city && (category === 'All' || item.category === category));
 
-                filteredData.forEach(item => {
-                    const priceClass = getPriceClass(item.priceRange);
-                    const card = document.createElement('div');
-                    card.className = 'card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden';
-                    card.innerHTML = `
-                        <div class="p-6">
-                            <div class="flex flex-wrap justify-between items-start mb-4 gap-2">
-                                <div class="w-full sm:w-auto">
-                                    <h3 class="font-bold text-xl text-gray-800">${item.name}</h3>
-                                    <p class="text-sm font-semibold text-purple-600 flex items-center">
-                                        <span class="text-2xl mr-2">${item.icon}</span> ${item.category}
-                                    </p>
-                                </div>
-                                <div class="flex flex-col sm:flex-row gap-1 items-start sm:items-center">
-                                    <span class="px-3 py-1 text-xs font-bold rounded-full uppercase ${priceClass}">
-                                        ${item.priceRange.toUpperCase()}
-                                    </span>
-                                    <span class="px-3 py-1 text-xs font-bold rounded-full uppercase area-tag">
-                                        ${item.area}
-                                    </span>
-                                </div>
+            filteredData.forEach(item => {
+                const priceClass = getPriceClass(item.priceRange);
+                const card = document.createElement('div');
+                card.className = 'card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden';
+                card.innerHTML = `
+                    <div class="p-6">
+                        <div class="flex flex-wrap justify-between items-start mb-4 gap-2">
+                            <div class="w-full sm:w-auto">
+                                <h3 class="font-bold text-xl text-gray-800">${item.name}</h3>
+                                <p class="text-sm font-semibold text-purple-600 flex items-center">
+                                    <span class="text-2xl mr-2">${item.icon}</span> ${item.category}
+                                </p>
                             </div>
-                            <p class="text-gray-600 mb-4">${item.description}</p>
-                            <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r-md">
-                                <h4 class="font-bold text-purple-800">Timing Strategy</h4>
-                                <p class="text-sm text-purple-700 mt-1">${item.timing}</p>
+                            <div class="flex flex-col sm:flex-row gap-1 items-start sm:items-center">
+                                <span class="px-3 py-1 text-xs font-bold rounded-full uppercase ${priceClass}">
+                                    ${item.priceRange.toUpperCase()}
+                                </span>
+                                <span class="px-3 py-1 text-xs font-bold rounded-full uppercase area-tag">
+                                    ${item.area}
+                                </span>
                             </div>
                         </div>
-                    `;
-                    container.appendChild(card);
-                });
-            };
+                        <p class="text-gray-600 mb-4">${item.description}</p>
+                        <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r-md">
+                            <h4 class="font-bold text-purple-800">Timing Strategy</h4>
+                            <p class="text-sm text-purple-700 mt-1">${item.timing}</p>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        };
 
-            const renderFilters = (city) => {
-                const container = document.getElementById(`${city}-filters`);
-                if (!container) return;
-                const categories = ['All', ...new Set(foodData.filter(item => item.city === city).map(item => item.category))].sort();
-                container.innerHTML = '';
-                categories.forEach(category => {
-                    const button = document.createElement('button');
-                    button.className = `filter-btn px-4 py-2 rounded-full text-sm font-semibold border-2 border-purple-200 text-purple-700 hover:bg-purple-50 ${category === 'All' ? 'active' : ''}`;
-                    button.textContent = category;
-                    button.dataset.city = city;
-                    button.dataset.category = category;
-                    container.appendChild(button);
-                });
+        const renderFilters = (city) => {
+            const container = document.getElementById(`${city}-filters`);
+            if (!container) return;
+            const categories = ['All', ...new Set(foodData.filter(item => item.city === city).map(item => item.category))].sort();
+            container.innerHTML = '';
+            categories.forEach(category => {
+                const button = document.createElement('button');
+                button.className = `filter-btn px-4 py-2 rounded-full text-sm font-semibold border-2 border-purple-200 text-purple-700 hover:bg-purple-50 ${category === 'All' ? 'active' : ''}`;
+                button.textContent = category;
+                button.dataset.city = city;
+                button.dataset.category = category;
+                container.appendChild(button);
+            });
 
-                container.addEventListener('click', (e) => {
-                    if (e.target.classList.contains('filter-btn')) {
-                        const city = e.target.dataset.city;
-                        const category = e.target.dataset.category;
-                        container.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-                        e.target.classList.add('active');
-                        renderCards(city, category);
-                    }
-                });
-            };
+            container.addEventListener('click', (e) => {
+                if (e.target.classList.contains('filter-btn')) {
+                    const city = e.target.dataset.city;
+                    const category = e.target.dataset.category;
+                    container.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                    e.target.classList.add('active');
+                    renderCards(city, category);
+                }
+            });
+        };
 
-            const renderChart = () => {
-                const ctx = document.getElementById('waitTimeChart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: waitTimeData.map(d => d.name),
-                        datasets: [{
-                            label: 'Estimated Peak Wait/Booking Time (Hours)',
-                            data: waitTimeData.map(d => d.time),
-                            backgroundColor: 'rgba(168, 85, 247, 0.6)',
-                            borderColor: 'rgba(147, 51, 234, 1)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        indexAxis: 'y',
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            x: {
-                                beginAtZero: true,
-                                title: {
-                                    display: true,
-                                    text: 'Hours (Booking lead time shown for reservation-only spots)'
-                                }
+        const renderChart = () => {
+            const ctx = document.getElementById('waitTimeChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: waitTimeData.map(d => d.name),
+                    datasets: [{
+                        label: 'Estimated Peak Wait/Booking Time (Hours)',
+                        data: waitTimeData.map(d => d.time),
+                        backgroundColor: 'rgba(168, 85, 247, 0.6)',
+                        borderColor: 'rgba(147, 51, 234, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Hours (Booking lead time shown for reservation-only spots)'
                             }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
                         },
-                        plugins: {
-                            legend: {
-                                display: false
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        let label = context.dataset.label || '';
-                                        if (label) {
-                                            label += ': ';
-                                        }
-                                        if (context.parsed.x !== null) {
-                                            if (context.label.includes("Booking")) {
-                                                // Convert hours to approximate weeks (assuming 1 hour in chart = 4 weeks lead time)
-                                                label += (context.parsed.x * 4).toFixed(0) + ' weeks lead time';
-                                            } else {
-                                                label += context.parsed.x.toFixed(2) + ' hours';
-                                            }
-                                        }
-                                        return label;
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
                                     }
+                                    if (context.parsed.x !== null) {
+                                        if (context.label.includes("Booking")) {
+                                            // Convert hours to approximate weeks (assuming 1 hour in chart = 4 weeks lead time)
+                                            label += (context.parsed.x * 4).toFixed(0) + ' weeks lead time';
+                                        } else {
+                                            label += context.parsed.x.toFixed(2) + ' hours';
+                                        }
+                                    }
+                                    return label;
                                 }
                             }
                         }
                     }
-                });
-            };
-            
+                }
+            });
+        };
+        
+        // Ensure all execution logic runs after the DOM is fully loaded and elements are available.
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.content-section');
+
             navLinks.forEach(link => {
                 link.addEventListener('click', () => {
                     const targetId = link.dataset.target;
+                    const city = targetId.replace('-section', '');
 
                     navLinks.forEach(l => l.classList.remove('active'));
                     link.classList.add('active');
@@ -361,16 +427,21 @@
                             section.classList.add('hidden');
                         }
                     });
+
+                    // Only render city-specific content if not on the tips tab
+                    if (city !== 'tips') {
+                        renderFilters(city);
+                        renderCards(city);
+                        renderActivities(city);
+                    }
                 });
             });
 
-            // Initial rendering
+            // Initial rendering on page load
+            // This runs the first time to show the Tokyo content and the chart.
             renderFilters('tokyo');
             renderCards('tokyo');
-            renderFilters('osaka');
-            renderCards('osaka');
-            renderFilters('kyoto');
-            renderCards('kyoto');
+            renderActivities('tokyo');
             renderChart();
         });
     </script>
